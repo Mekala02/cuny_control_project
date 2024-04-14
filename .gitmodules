@@ -1,0 +1,3 @@
+[submodule "src/gazebo_project"]
+	path = src/gazebo_project
+	url = https://github.com/gulerburak/gazebo_project.git
