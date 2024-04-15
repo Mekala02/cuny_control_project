@@ -52,7 +52,7 @@ By completing this assignment, you'll reinforce your understanding of control st
 - The provided code includes a pre-built racing track in the Gazebo simulation environment. Your task is to write Pure Pursuit and Stanley controllers to control the vehicle on this track.
 - You are only required to write the Pure Pursuit and Stanley controllers. The remaining code is provided by the course staff.
 - Test your code thoroughly and tune the necessary parameters (e.g., lookahead distance, k) to ensure optimal performance.
-- Upon submission, your code will be tested. Your controllers should complete the track within 3 minutes without any crashes.
+- Upon submission, your code will be tested. Your controllers should complete the track under 8 minutes without any crashes.
 
 
 ## Dependencies
@@ -94,11 +94,13 @@ ros2 launch launch/gazebo_launch.py
 <img src="https://github.com/Mekala02/cuny_control_project/blob/master/docs/d.jpeg" title="Web_Interface" alt="Web_Interface"/>&nbsp;
 
 
-- To execute the Pure Pursuit controller, use the following command:
+- To execute the Pure Pursuit and Stanley controllers, you'll need to implement them first. Once implemented, use the following commands. Ensure that you've launched the gazebo_launch.py script beforehand. The gazebo.launch.py script should be running simultaneously with the Pure Pursuit or Stanley controller.
+Also, remember to source the environment with ```source install/setup.bash``` before running the controllers.
+- Pure Pursuit
 ```bash
 ros2 run controller pure_pursuit
 ```
-- To execute the stanley controller, use the following command:
+- Stanley:
 ```bash
 ros2 run controller stanley
 ```
