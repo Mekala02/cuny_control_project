@@ -18,7 +18,7 @@ For this homework assignment, you'll be implementing crucial functions within bo
 
 **Instructions:**
 - Utilize the waypoints stored in `self.waypoints` to calculate the desired heading and cross-track error.
-  
+
 ### Testing and Evaluation
 
 - Test your implementations in a simulated environment using ROS 2 and Gazebo.
@@ -26,9 +26,16 @@ For this homework assignment, you'll be implementing crucial functions within bo
 
 By completing this assignment, you'll reinforce your understanding of control strategies for autonomous vehicle navigation and gain practical experience in developing control algorithms for autonomous systems.
 
+## Additional Notes:
+
+- The provided code includes a pre-built racing track in the Gazebo simulation environment. Your task is to write Pure Pursuit and Stanley controllers to control the vehicle on this track.
+- You are only required to write the Pure Pursuit and Stanley controllers. The remaining code is provided by the course staff.
+- Test your code thoroughly and tune the necessary parameters (e.g., lookahead distance, k) to ensure optimal performance.
+- Upon submission, your code will be tested. Your controllers should complete the track within 3 minutes without any crashes.
+
 ## Dependencies
 
-You need to install ROS 2 humble and Gazebo Sim for this project.
+You need to install ROS 2 Humble and Gazebo Sim for this project.
 
 - [ROS2 Humble installation instructions](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 - [Gazebo Sim installation instructions](https://gazebosim.org/docs/fortress/install_ubuntu)
@@ -50,12 +57,21 @@ colcon build --packages-select gazebo_project controller messages --symlink-inst
 ros2 launch launch/gazebo_launch.py
 
 ```
+### Launching the gazebo_launch.py script will open two windows: RViz and the Gazebo simulation environment
+<img src="https://github.com/Mekala02/cuny_control_project/blob/master/docs/a.jpeg" title="Web_Interface" alt="Web_Interface"/>&nbsp;
+### To position the camera near the vehicle, click the "Move To" button:
+<img src="https://github.com/Mekala02/cuny_control_project/blob/master/docs/b.jpeg" title="Web_Interface" alt="Web_Interface"/>&nbsp;
+### For illumination, use the provided button to light up the surroundings:
+<img src="https://github.com/Mekala02/cuny_control_project/blob/master/docs/c.jpeg" title="Web_Interface" alt="Web_Interface"/>&nbsp;
+<br/>
+<img src="https://github.com/Mekala02/cuny_control_project/blob/master/docs/d.jpeg" title="Web_Interface" alt="Web_Interface"/>&nbsp;
 
-- Run pure pursuit:
+
+- To execute the Pure Pursuit controller, use the following command:
 ```bash
 ros2 run controller pure_pursuit
 ```
-- Run stanley:
+- To execute the stanley controller, use the following command:
 ```bash
 ros2 run controller stanley
 ```
