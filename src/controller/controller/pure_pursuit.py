@@ -15,9 +15,9 @@ class PurePursuitController(Node):
         self.wheelbase = 1.8
 
         # Tunable parameters
-        self.k = 1.8
-        self.linear_velocity = 9.0
-        self.lookahead_distance = self.k * self.linear_velocity
+        self.k = 1.0
+        self.linear_velocity = 3.0
+        self.lookahead_distance = 9.0
 
         # Subscribe to /gazebo/vehicle_state topic
         self.subscription = self.create_subscription(
@@ -84,6 +84,17 @@ class PurePursuitController(Node):
         self.waypoints. The waypoints represent the path that the vehicle
         should follow, and the controller uses them along with self.wheelbase
         to calculate the optimal steering angle to stay on track.
+
+        Additional Notes:
+            The self.waypoints list automatically updates to reflect the planned trajectory of
+            the autonomous vehicle. This list serves as a repository of coordinates, representing
+            waypoints along the vehicle's trajectory. As the vehicle progresses, the list is
+            continuously updated based on its position, ensuring it contains only the waypoints
+            relevant to its current location and future path. The first index in the list
+            corresponds to the closest waypoint to the vehicle, prioritizing navigation towards
+            nearby points. Additionally, the list excludes waypoints that are behind the vehicle,
+            focusing solely on waypoints ahead to streamline navigation planning and decision-making
+            processes for control algorithms.
         """
 
         raise NotImplementedError
