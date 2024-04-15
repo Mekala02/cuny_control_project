@@ -19,7 +19,28 @@ For this homework assignment, you'll be implementing crucial functions within bo
 **Instructions:**
 - Utilize the waypoints stored in `self.waypoints` to calculate the desired heading and cross-track error.
 
-### Testing and Evaluation
+## Modifying Code Sections
+
+### Pure Pursuit Controller (/src/controller/controller/pure_pursuit.py)
+Students should only modify the following sections of the code in the provided `pure_pursuit.py` file:
+
+- Implement the `generate_control_output(self, current_x, current_y, yaw)` function.
+- Tune the parameters:
+    - `self.k` (proportional gain)
+    - `self.linear_velocity` (constant linear velocity)
+    - `self.lookahead_distance` (lookahead distance)
+
+### Stanley Controller (/src/controller/controller/stanley.py)
+Students should only modify the following sections of the code in the provided `stanley.py` file:
+
+- Implement the `generate_control_output(self, current_x, current_y, yaw)` function.
+- Tune the parameters:
+    - `self.k` (proportional gain)
+    - `self.linear_velocity` (constant linear velocity)
+  
+<b> Ensure that you do not modify other sections of the code to maintain compatibility with the existing system. Additionally, note that we will use our own code for testing, and only your controller code will be utilized, excluding the rest. <b/>
+
+## Testing and Evaluation
 
 - Test your implementations in a simulated environment using ROS 2 and Gazebo.
 - Explore parameter tuning to observe the behavior of the vehicle under different scenarios.
@@ -33,6 +54,7 @@ By completing this assignment, you'll reinforce your understanding of control st
 - Test your code thoroughly and tune the necessary parameters (e.g., lookahead distance, k) to ensure optimal performance.
 - Upon submission, your code will be tested. Your controllers should complete the track within 3 minutes without any crashes.
 
+
 ## Dependencies
 
 You need to install ROS 2 Humble and Gazebo Sim for this project.
@@ -43,6 +65,11 @@ You need to install ROS 2 Humble and Gazebo Sim for this project.
 ROS2 Package dependencies
 ```bash
 sudo apt install ros-humble-ros-gz-sim ros-humble-ros-gz-bridge ros-humble-xacro ros-humble-joint-state-publisher* ros-humble-rqt*
+```
+## Clone the repo
+
+```bash
+git clone --recurse-submodules https://github.com/Mekala02/cuny_control_project.git
 ```
 
 ## Building the packages
@@ -57,7 +84,7 @@ colcon build --packages-select gazebo_project controller messages --symlink-inst
 ros2 launch launch/gazebo_launch.py
 
 ```
-### Launching the gazebo_launch.py script will open two windows: RViz and the Gazebo simulation environment
+### Launching the gazebo_launch.py script will open two windows: RViz and the Gazebo simulation environment (The initial loading time for the first run may take up to 10 minutes as it downloads the map.)
 <img src="https://github.com/Mekala02/cuny_control_project/blob/master/docs/a.jpeg" title="Web_Interface" alt="Web_Interface"/>&nbsp;
 ### To position the camera near the vehicle, click the "Move To" button:
 <img src="https://github.com/Mekala02/cuny_control_project/blob/master/docs/b.jpeg" title="Web_Interface" alt="Web_Interface"/>&nbsp;
