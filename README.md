@@ -69,7 +69,7 @@ sudo apt install ros-humble-ros-gz-sim ros-humble-ros-gz-bridge ros-humble-xacro
 ## Clone the repo
 
 ```bash
-git clone --recurse-submodules https://github.com/Mekala02/cuny_control_project.git
+git clone --recurse-submodules https://github.com/ITU-EMAV/control-project-<your_username>
 ```
 
 ## Building the packages
@@ -103,3 +103,5 @@ ros2 run controller pure_pursuit
 ros2 run controller stanley
 ```
 
+## How to submit?
+- Simply push the changes you made to your cloned repository at: https://github.com/ITU-EMAV/control-project-<your_username>
