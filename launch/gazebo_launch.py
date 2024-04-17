@@ -20,6 +20,16 @@ def generate_launch_description():
                 ])
             ]),
         ),
+        Node(
+            package="rqt_gui",
+            namespace="",
+            executable="rqt_gui",
+            name="rqt_gui",
+            arguments=[
+                "--perspective-file",
+                os.path.join(cwd, "launch/config", "rqt.perspective"),
+            ],
+        ),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([
@@ -37,5 +47,6 @@ def generate_launch_description():
             executable='rviz2',
             name='rviz2',
             arguments=['-d', os.path.join(cwd, 'launch/config', 'config.rviz')]
-        )
+        ),
+        
     ])
