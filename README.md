@@ -104,6 +104,9 @@ ros2 run controller pure_pursuit
 ```bash
 ros2 run controller stanley
 ```
+### After running the controller, you can observe the reference tracking errors on the x-axis, y-axis, and as Euclidean distance.
+<img src="docs/rqt.png" title="rqt_gui" alt="rqt_gui"/>&nbsp;
+<br/>
 
 ## How to submit?
 - Simply push the changes you made to your cloned repository at: https://github.com/ITU-EMAV/control-project-<your_username>
