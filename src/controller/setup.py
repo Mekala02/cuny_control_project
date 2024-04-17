@@ -29,6 +29,7 @@ setup(
             'pure_pursuit = controller.pure_pursuit:main',
             'stanley = controller.stanley:main',
             'pid = controller.pid:main',
+            "plotter = controller.plotter:main",
         ],
     },
 )

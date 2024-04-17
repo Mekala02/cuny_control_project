@@ -13,4 +13,6 @@ def generate_launch_description():
             executable='waypoint_publisher',
             name='waypoint_publisher'
         ),
+        Node(package="controller", executable="plotter", name="plotter"),
+
     ])
