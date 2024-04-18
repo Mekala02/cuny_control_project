@@ -1,20 +1,18 @@
-# control_lecture
-
 ## Homework Assignment
 
-For this homework assignment, you'll be implementing crucial functions within both the Pure Pursuit and Stanley Controllers. Below are the tasks for each controller:
+In this homework assignment, you'll be developing trajectory tracking algorithms using both the Pure Pursuit and Stanley methods. Below are the instructions needed for the implemetation of each controller:
 
 ### Pure Pursuit Controller
 
-**Task:** Implement the `generate_control_output` function to calculate the steering angle required for path following.
+**Task:** To implement the pure pursuit control algorithm by writing your code in the `generate_control_output` section that calculates the steering angle required for the trajectory tracking.
 
 **Instructions:**
 - Utilize the waypoints stored in `self.waypoints` to determine the optimal steering angle for the vehicle to follow the predefined path.
-- Ensure that you incorporate the `self.wheelbase` parameter in your calculations to accurately determine the vehicle's turning radius.
+- Ensure that you incorporate the `self.wheelbase` parameter in your code to accurately determine the vehicle's turning radius.
 
 ### Stanley Controller
 
-**Task:** Implement the `generate_control_output` function to calculate the steering angle required for path following.
+**Task:** To implement the stanley control algorithm by writing your code in the `generate_control_output` section that calculates the steering angle required for the trajectory tracking.
 
 **Instructions:**
 - Utilize the waypoints stored in `self.waypoints` to calculate the desired heading and cross-track error.
@@ -25,7 +23,7 @@ For this homework assignment, you'll be implementing crucial functions within bo
 Students should only modify the following sections of the code in the provided `pure_pursuit.py` file:
 
 - Implement the `generate_control_output(self, current_x, current_y, yaw)` function.
-- Tune the parameters:
+- Tune following the parameters for the desired tracking performance:
     - `self.k` (proportional gain)
     - `self.linear_velocity` (constant linear velocity)
     - `self.lookahead_distance` (lookahead distance)
@@ -34,7 +32,7 @@ Students should only modify the following sections of the code in the provided `
 Students should only modify the following sections of the code in the provided `stanley.py` file:
 
 - Implement the `generate_control_output(self, current_x, current_y, yaw)` function.
-- Tune the parameters:
+- Tune following the parameters for the desired tracking performance:
     - `self.k` (proportional gain)
     - `self.linear_velocity` (constant linear velocity)
   
