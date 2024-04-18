@@ -40,17 +40,17 @@ Student are expected to contribute to the following sections in the provided `st
 
 ## Testing and Evaluation
 
-- Test your implementations in a simulated environment using ROS 2 and Gazebo.
-- Explore parameter tuning to observe the behavior of the vehicle under different scenarios.
+- Test your implementations in the provided simulated environment using ROS 2 and Gazebo.
+- Investigate the effects of parameter tuning on the behavior of the vehicle.
 
-By completing this assignment, you'll reinforce your understanding of control strategies for autonomous vehicle navigation and gain practical experience in developing control algorithms for autonomous systems.
+By completing this assignment, you'll have reinforced your understanding of control strategies for autonomous vehicle navigation and gain practical experience in developing control algorithms for autonomous systems.
 
 ## Additional Notes:
 
 - The provided code includes a pre-built racing track in the Gazebo simulation environment. Your task is to write Pure Pursuit and Stanley controllers to control the vehicle on this track.
 - You are only required to write the Pure Pursuit and Stanley controllers. The remaining code is provided by the course staff.
-- Test your code thoroughly and tune the necessary parameters (e.g., lookahead distance, k) to ensure optimal performance.
-- Upon submission, your code will be tested. Your controllers should complete the track under 8 minutes without any crashes.
+- Explore the effects of parameter tuning (e.g., lookahead distance, k) to ensure optimal performance.
+- Upon submission, your code will be tested by us. With the developed controllers, the vehicle is expected to complete the track under 8 minutes without deviating from the track.
 
 
 ## Dependencies
