@@ -1,10 +1,10 @@
 ## Homework Assignment
 
-In this homework assignment, you'll be developing trajectory tracking algorithms using both the Pure Pursuit and Stanley methods. Below are the instructions needed for the implemetation of each controller:
+With this homework assignment we aim to provide you with the experience in the development of basic geometric control algorithms; i.e. pure pursuit and stanley. For this purpose, the provided code in this repository already has the necessary ROS2 and Gazebo Sim communication codes. So, you could consider it an an example for your future work. Below are your specific tasks for this assignment.
 
-### Pure Pursuit Controller
+### For Pure Pursuit Controller
 
-**Task:** To implement the pure pursuit control algorithm by writing your code in the `generate_control_output` section that calculates the steering angle required for the trajectory tracking.
+**Task:** To develop a pure pursuit control algorithm by writing your code in the indicated section below (generate_control_output). This algorithm should calculate the steering angle required for the trajectory tracking.
 
 **Instructions:**
 - Utilize the waypoints stored in `self.waypoints` to determine the optimal steering angle for the vehicle to follow the predefined path.
@@ -12,7 +12,7 @@ In this homework assignment, you'll be developing trajectory tracking algorithms
 
 ### Stanley Controller
 
-**Task:** To implement the stanley control algorithm by writing your code in the `generate_control_output` section that calculates the steering angle required for the trajectory tracking.
+**Task:** To develop a stanley control algorithm by writing your code in the indicated section below (generate_control_output). This algorithm should calculate the steering angle required for the trajectory tracking.
 
 **Instructions:**
 - Utilize the waypoints stored in `self.waypoints` to calculate the desired heading and cross-track error.
@@ -20,23 +20,23 @@ In this homework assignment, you'll be developing trajectory tracking algorithms
 ## Modifying Code Sections
 
 ### Pure Pursuit Controller (/src/controller/controller/pure_pursuit.py)
-Students should only modify the following sections of the code in the provided `pure_pursuit.py` file:
+Student are expected to contribute to the following sections in the provided `pure_pursuit.py` file:
 
-- Implement the `generate_control_output(self, current_x, current_y, yaw)` function.
-- Tune following the parameters for the desired tracking performance:
+- Implementation of the PPC code `generate_control_output(self, current_x, current_y, yaw)` function.
+- Tuning of following the parameters for the desired tracking performance:
     - `self.k` (proportional gain)
     - `self.linear_velocity` (constant linear velocity)
     - `self.lookahead_distance` (lookahead distance)
 
 ### Stanley Controller (/src/controller/controller/stanley.py)
-Students should only modify the following sections of the code in the provided `stanley.py` file:
+Student are expected to contribute to the following sections in the provided `stanley.py` file:
 
-- Implement the `generate_control_output(self, current_x, current_y, yaw)` function.
+- Implementation of the Stanley code`generate_control_output(self, current_x, current_y, yaw)` function.
 - Tune following the parameters for the desired tracking performance:
     - `self.k` (proportional gain)
     - `self.linear_velocity` (constant linear velocity)
   
-<b> Ensure that you do not modify other sections of the code to maintain compatibility with the existing system. Additionally, note that we will use our own code for testing, and only your controller code will be utilized, excluding the rest. <b/>
+<b>Note: We recommend that you do not modify any other sections in given file. However, feel free to make improvements to the code (at your risk) by also indicating the modifications you made. Otherwise, to evaluate your algorithm we will use our own code in integration with your controller code. <b/>
 
 ## Testing and Evaluation
 
