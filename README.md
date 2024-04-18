@@ -1,20 +1,18 @@
-# control_lecture
-
 ## Homework Assignment
 
-For this homework assignment, you'll be implementing crucial functions within both the Pure Pursuit and Stanley Controllers. Below are the tasks for each controller:
+With this homework assignment we aim to provide you with the experience in the development of basic geometric control algorithms; i.e. pure pursuit and stanley. For this purpose, the provided code in this repository already has the necessary ROS2 and Gazebo Sim communication codes. So, you could consider it an an example for your future work. Below are your specific tasks for this assignment.
 
-### Pure Pursuit Controller
+### For Pure Pursuit Controller
 
-**Task:** Implement the `generate_control_output` function to calculate the steering angle required for path following.
+**Task:** To develop a pure pursuit control algorithm by writing your code in the indicated section below (generate_control_output). This algorithm should calculate the steering angle required for the trajectory tracking.
 
 **Instructions:**
 - Utilize the waypoints stored in `self.waypoints` to determine the optimal steering angle for the vehicle to follow the predefined path.
-- Ensure that you incorporate the `self.wheelbase` parameter in your calculations to accurately determine the vehicle's turning radius.
+- Ensure that you incorporate the `self.wheelbase` parameter in your code to accurately determine the vehicle's turning radius.
 
 ### Stanley Controller
 
-**Task:** Implement the `generate_control_output` function to calculate the steering angle required for path following.
+**Task:** To develop a stanley control algorithm by writing your code in the indicated section below (generate_control_output). This algorithm should calculate the steering angle required for the trajectory tracking.
 
 **Instructions:**
 - Utilize the waypoints stored in `self.waypoints` to calculate the desired heading and cross-track error.
@@ -22,37 +20,37 @@ For this homework assignment, you'll be implementing crucial functions within bo
 ## Modifying Code Sections
 
 ### Pure Pursuit Controller (/src/controller/controller/pure_pursuit.py)
-Students should only modify the following sections of the code in the provided `pure_pursuit.py` file:
+Student are expected to contribute to the following sections in the provided `pure_pursuit.py` file:
 
-- Implement the `generate_control_output(self, current_x, current_y, yaw)` function.
-- Tune the parameters:
+- Implementation of the PPC code `generate_control_output(self, current_x, current_y, yaw)` function.
+- Tuning of following the parameters for the desired tracking performance:
     - `self.k` (proportional gain)
     - `self.linear_velocity` (constant linear velocity)
     - `self.lookahead_distance` (lookahead distance)
 
 ### Stanley Controller (/src/controller/controller/stanley.py)
-Students should only modify the following sections of the code in the provided `stanley.py` file:
+Student are expected to contribute to the following sections in the provided `stanley.py` file:
 
-- Implement the `generate_control_output(self, current_x, current_y, yaw)` function.
-- Tune the parameters:
+- Implementation of the Stanley code`generate_control_output(self, current_x, current_y, yaw)` function.
+- Tune following the parameters for the desired tracking performance:
     - `self.k` (proportional gain)
     - `self.linear_velocity` (constant linear velocity)
   
-<b> Ensure that you do not modify other sections of the code to maintain compatibility with the existing system. Additionally, note that we will use our own code for testing, and only your controller code will be utilized, excluding the rest. <b/>
+<b>Note: We recommend that you do not modify any other sections in given file. However, feel free to make improvements to the code (at your risk) by also indicating the modifications you made. Otherwise, to evaluate your algorithm we will use our own code in integration with your controller code. <b/>
 
 ## Testing and Evaluation
 
-- Test your implementations in a simulated environment using ROS 2 and Gazebo.
-- Explore parameter tuning to observe the behavior of the vehicle under different scenarios.
+- Test your implementations in the provided simulated environment using ROS 2 and Gazebo.
+- Investigate the effects of parameter tuning on the behavior of the vehicle.
 
-By completing this assignment, you'll reinforce your understanding of control strategies for autonomous vehicle navigation and gain practical experience in developing control algorithms for autonomous systems.
+By completing this assignment, you'll have reinforced your understanding of control strategies for autonomous vehicle navigation and gain practical experience in developing control algorithms for autonomous systems.
 
 ## Additional Notes:
 
 - The provided code includes a pre-built racing track in the Gazebo simulation environment. Your task is to write Pure Pursuit and Stanley controllers to control the vehicle on this track.
 - You are only required to write the Pure Pursuit and Stanley controllers. The remaining code is provided by the course staff.
-- Test your code thoroughly and tune the necessary parameters (e.g., lookahead distance, k) to ensure optimal performance.
-- Upon submission, your code will be tested. Your controllers should complete the track under 8 minutes without any crashes.
+- Explore the effects of parameter tuning (e.g., lookahead distance, k) to ensure optimal performance.
+- Upon submission, your code will be tested by us. With the developed controllers, the vehicle is expected to complete the track under 8 minutes without deviating from the track.
 
 
 ## Dependencies
@@ -104,6 +102,9 @@ ros2 run controller pure_pursuit
 ```bash
 ros2 run controller stanley
 ```
+### After running the controller, you can observe the reference tracking errors on the x-axis, y-axis, and as Euclidean distance.
+<img src="docs/rqt.png" title="rqt_gui" alt="rqt_gui"/>&nbsp;
+<br/>
 
 ## How to submit?
 - Simply push the changes you made to your cloned repository at: https://github.com/ITU-EMAV/control-project-<your_username>
