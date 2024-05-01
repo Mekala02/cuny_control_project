@@ -2,8 +2,9 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist, Point
 from nav_msgs.msg import Path
-from messages.msg import VehicleState # Import the custom message type for vehicle state
+from messages.msg import VehicleState  # Import the custom message type for vehicle state
 import math
+
 
 class PurePursuitController(Node):
     def __init__(self):
@@ -67,37 +68,37 @@ class PurePursuitController(Node):
         return angular_velocity
 
     def generate_control_output(self, current_x, current_y, yaw):
-        """
-        Calculates the steering angle required for path following (Use Pure Pursuit algorithm).
-
-        Args:
-            current_x (float): Current x-coordinate of the vehicle.
-            current_y (float): Current y-coordinate of the vehicle.
-            yaw (float): Current yaw angle (orientation) of the vehicle.
-
-        Returns:
-            float: Steering angle in radians.
-
-        This function is called by pose_callback() to determine the necessary
-        steering angle based on the vehicle's current position and orientation,
-        as well as the recent waypoints automatically updated and stored in
-        self.waypoints. The waypoints represent the path that the vehicle
-        should follow, and the controller uses them along with self.wheelbase
-        to calculate the optimal steering angle to stay on track.
-
-        Additional Notes:
-            The self.waypoints list automatically updates to reflect the planned trajectory of
-            the autonomous vehicle. This list serves as a repository of coordinates, representing
-            waypoints along the vehicle's trajectory. As the vehicle progresses, the list is
-            continuously updated based on its position, ensuring it contains only the waypoints
-            relevant to its current location and future path. The first index in the list
-            corresponds to the closest waypoint to the vehicle, prioritizing navigation towards
-            nearby points. Additionally, the list excludes waypoints that are behind the vehicle,
-            focusing solely on waypoints ahead to streamline navigation planning and decision-making
-            processes for control algorithms.
-        """
-
+        if not self.waypoints:
+            raise NotImplementedError
+    
+        # The closest waypoint to the vehicle
+        closest_dist = float('inf')
+        closest_index = 0
+        for i, waypoint in enumerate(self.waypoints):
+            dist = self.distance((current_x, current_y), waypoint)
+            if dist < closest_dist:
+                closest_dist = dist
+                closest_index = i
+        
+        # The lookahead waypoint index
+        lookahead_index = closest_index
+        while lookahead_index < len(self.waypoints) - 1:
+            if self.distance(self.waypoints[closest_index], self.waypoints[lookahead_index]) > self.lookahead_distance:
+                break
+            lookahead_index += 1
+        
+        # The steering angle using the Pure Pursuit algorithm
+        lookahead_point = self.waypoints[lookahead_index]
+        alpha = math.atan2(lookahead_point[1] - current_y, lookahead_point[0] - current_x) - yaw
+        steering_angle = math.atan2(2.0 * self.wheelbase * math.sin(alpha), self.lookahead_distance)
+        
+        # Apply proportional gain
+        steering_angle *= self.k
+        
+        return steering_angle
+    
         raise NotImplementedError
+
 
 def main(args=None):
     rclpy.init(args=args)
@@ -105,6 +106,7 @@ def main(args=None):
     rclpy.spin(controller)
     controller.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()

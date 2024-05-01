@@ -2,10 +2,10 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist, Point
 from nav_msgs.msg import Path
-from messages.msg import VehicleState # Import the custom message type for vehicle state
+from messages.msg import VehicleState  # Import the custom message type for vehicle state
 import math
 
-class PurePursuitController(Node):
+class StanleyController(Node):
     def __init__(self):
         super().__init__('stanley_controller')
         self.logger = self.get_logger()
@@ -16,8 +16,8 @@ class PurePursuitController(Node):
         self.wheelbase = 1.8
 
         # Tunable parameters
-        self.k = 1
-        self.linear_velocity = 3.0
+        self.k = 1  # Placeholder for proportional gain
+        self.linear_velocity = 3.0  # Placeholder for constant linear velocity
 
         # Subscribe to /gazebo/vehicle_state topic
         self.subscription = self.create_subscription(
@@ -64,42 +64,32 @@ class PurePursuitController(Node):
         return angular_velocity
 
     def generate_control_output(self, current_x, current_y, yaw):
-        """
-        Calculates the steering angle required for path following (Use Stanley Algorithm).
+        if not self.waypoints:
+            return 0.0
 
-        Args:
-            current_x (float): Current x-coordinate of the vehicle.
-            current_y (float): Current y-coordinate of the vehicle.
-            yaw (float): Current yaw angle (orientation) of the vehicle.
+        closest_dist = float('inf')
+        closest_index = 0
+        for i, waypoint in enumerate(self.waypoints):
+            dist = math.sqrt((current_x - waypoint[0])**2 + (current_y - waypoint[1])**2)
+            if dist < closest_dist:
+                closest_dist = dist
+                closest_index = i
 
-        Returns:
-            float: Steering angle in radians.
+        # Calculate cross track error 
+        waypoint_x, waypoint_y = self.waypoints[closest_index]
+        heading_vector = [math.cos(yaw), math.sin(yaw)]
+        waypoint_vector = [waypoint_x - current_x, waypoint_y - current_y]
+        cross_track_error = math.cross(heading_vector, waypoint_vector)
 
-        This function is called by pose_callback() to determine the necessary
-        steering angle based on the vehicle's current position and orientation,
-        as well as the recent waypoints automatically updated and stored in
-        self.waypoints. The waypoints represent the path that the vehicle
-        should follow, and the controller uses them to calculate the optimal
-        steering angle to stay on track.
+        desired_heading = math.atan2(waypoint_y - current_y, waypoint_x - current_x)
+        heading_error = desired_heading - yaw
+        steering_angle = heading_error + math.atan2(self.k * cross_track_error, self.linear_velocity)
 
-        Additional Notes:
-            The self.waypoints list automatically updates to reflect the planned trajectory of
-            the autonomous vehicle. This list serves as a repository of coordinates, representing
-            waypoints along the vehicle's trajectory. As the vehicle progresses, the list is
-            continuously updated based on its position, ensuring it contains only the waypoints
-            relevant to its current location and future path. The first index in the list
-            corresponds to the closest waypoint to the vehicle, prioritizing navigation towards
-            nearby points. Additionally, the list excludes waypoints that are behind the vehicle,
-            focusing solely on waypoints ahead to streamline navigation planning and decision-making
-            processes for control algorithms.
-        """
-
-        raise NotImplementedError
-    
+        return steering_angle
 
 def main(args=None):
     rclpy.init(args=args)
-    controller = PurePursuitController()
+    controller = StanleyController()
     rclpy.spin(controller)
     controller.destroy_node()
     rclpy.shutdown()
