@@ -170,3 +170,4 @@ log
 .ignition
 .rviz2
 .gazebo
+.config/ros.org/rqt_gui.ini
