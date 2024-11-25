@@ -55,6 +55,40 @@ By completing this assignment, you'll have reinforced your understanding of cont
 
 ## Dependencies
 
+### Preferred Method: Using Docker (Recommended)
+
+To ensure consistency and streamline the setup process, it is recommended that students use the Docker-based method outlined below.
+1. Install Ubuntu (a native installation is recommended for better compatibility).
+
+2. Install Docker
+    - [Follow the Docker installation instructions:](https://docs.docker.com/engine/install/ubuntu/)
+
+3. Pull the docker image
+    ```
+    docker pull mekala02/lecture:humble
+    ```
+
+4. Clone the Repo
+   ```
+   git clone --recurse-submodules https://github.com/ITU-EMAV/control-project-<your_username>    
+   ```
+
+5. Go inside of the directory
+   ```
+   cd control-project-<your_username>
+   ```
+6. Grant access to the X server (necessary for GUI applications like Gazebo and Rviz)
+   ```
+   xhost +
+    ```
+7. Run the Docker container
+   ```
+   sudo docker run -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --net=host -it -v $(pwd):/root mekala02/lecture:humble
+   ```
+### Alternative Method: Native Installation (Optional)
+
+While the Docker-based approach is strongly recommended, students may opt for the following native installation method. Please note that this method is provided as an alternative, and questions will not be addressed for any issues beyond installation.
+
 You need to install ROS 2 Humble and Gazebo Sim for this project.
 
 - [ROS2 Humble installation instructions](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
@@ -64,17 +98,17 @@ ROS2 Package dependencies
 ```bash
 sudo apt install ros-humble-ros-gz-sim ros-humble-ros-gz-bridge ros-humble-xacro ros-humble-joint-state-publisher* ros-humble-rqt*
 ```
-## Clone the repo
+Clone the repo
 
 ```bash
 git clone --recurse-submodules https://github.com/ITU-EMAV/control-project-<your_username>
 ```
 
 ## Building the packages
-
 Build the package and source install/setup.bash.
 ```bash
-colcon build --packages-select gazebo_project controller messages --symlink-install && source install/setup.bash
+sudo bash colcon_build.bash
+source install/setup.bash
 ```
 
 - To run the gazebo simulation and rviz:
@@ -93,7 +127,7 @@ ros2 launch launch/gazebo_launch.py
 
 
 - To execute the Pure Pursuit and Stanley controllers, you'll need to implement them first. Once implemented, use the following commands. Ensure that you've launched the gazebo_launch.py script beforehand. The gazebo.launch.py script should be running simultaneously with the Pure Pursuit or Stanley controller.
-Also, remember to source the environment with ```source install/setup.bash``` before running the controllers.
+Also, remember to source the environment with ```source install/setup.bash``` before running the controllers. If you're using Docker, ensure that the same container is used to run both the gazebo_launch.py script and the Pure Pursuit or Stanley controller.
 - Pure Pursuit
 ```bash
 ros2 run controller pure_pursuit
